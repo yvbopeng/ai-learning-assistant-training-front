@@ -67,7 +67,6 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, PlayerProps>(
     {
       url,
       autoPlay = false,
-      width = '100%',
       height = 'auto',
       subtitles = [],
       onError,
@@ -122,11 +121,6 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, PlayerProps>(
         endTime: parseTimeToSeconds(sub.end)
       }));
     }, [subtitles]);
-
-    // Computed
-    const containerWidth = useMemo(() => {
-      return width.includes('%') || width.includes('px') ? width : `${width}px`;
-    }, [width]);
 
     const containerHeight = useMemo(() => {
       return height.includes('%') || height.includes('px') ? height : `${height}px`;
@@ -649,7 +643,7 @@ export const VideoPlayer = forwardRef<VideoPlayerRef, PlayerProps>(
             ref={videoPlayerRef}
             id={playerIdRef.current}
             className="w-full h-full object-contain bg-black"
-            style={{ width: containerWidth, height: containerHeight }}
+            style={{ height: containerHeight }}
             onClick={togglePlay}
           />
 
